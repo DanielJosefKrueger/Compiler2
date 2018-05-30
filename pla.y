@@ -127,14 +127,31 @@ PROGRAM:	{
 		
 
 BLOCK:
-		CONSTDECL VARDECL PROCDECL STATEMENT | VARDECL PROCDECL STATEMENT | CONSTDECL PROCDECL STATEMENT | PROCDECL STATEMENT
+		CONSTDECL VARDECL PROCDECL STATEMENT
 
 		{
 			if(actsym->precsym != NULL){
 				actsym = actsym->precsym;
 			}
 		}
+		;
+CONSTDECL: "const" CONSTASSIGNS ";" | 
+        ;
 
+CONSTASSIGNS: CONSTASS | CONSTASS "," CONSTASSIGNS
+		;
+		
+CONSTASS:	IDENT "=" NUMBER
+		{ 
+			if(lookup_in_actsym($1)!=0) {
+				/* IDENT doppelt vergeben */
+				error(34);
+			} else {
+				insert(CONST,$1,$3);
+			}						
+		}	
+		;			
+		
 CONDITION:	EXPRESSION RELOP EXPRESSION
 		;
 		
