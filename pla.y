@@ -179,6 +179,23 @@ VARASS:
 		}
 		;
 
+PROCDECLASS:
+		PROCDECL PROCDECLASS |
+		;
+
+PROCDECL:	
+		"procedure" IDENT ";"	
+		{
+			if(lookup($2)!=0) {
+				/* Doppeldeklaration pruefen */
+				error(34);
+			} else {
+				actsym = insert(PROC, $2, 0)->subsym;
+			}
+		}
+		BLOCK ";" |
+		;
+
 CONDITION:	EXPRESSION RELOP EXPRESSION
 		;
 		
