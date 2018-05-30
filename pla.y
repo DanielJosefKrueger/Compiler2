@@ -142,7 +142,7 @@ CONSTDECL: "const" CONSTASSIGNS ";" |
 CONSTASSIGNS: CONSTASS | CONSTASS "," CONSTASSIGNS
 		;
 
-CONSTASS:	IDENT "=" NUMBER
+CONSTASS:	IDENT "=" INTNUMBER
 		{
 			if(lookup_in_actsym($1)!=0) {
 				/* IDENT doppelt vergeben */
@@ -279,10 +279,10 @@ FACTOR:		IDENT
 		| REALNUMBER
 		| "(" EXPRESSION ")"
 		;
-
+/*
 NUMBER: INTNUMBER | REALNUMBER
 		;
-/*		
+		
 INTNUMBER: DIGITS
 		;
 
