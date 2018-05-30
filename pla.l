@@ -30,30 +30,15 @@ DIGIT	[0-9]
 "var"			return VAR;
 
 
-
-[0-9]+    {    /* WERT HOLEN UND ABSPEICHERN */
-            yylval.num = atoi(yytext);
-            return NUMBER;
-        }
-
-
-[a-zA-Z][a-zA-Z0-9]* {
-            /* STRING KOPIEREN */
-            strcpy(yylval.idname, yytext);
-            return IDENT;
-        }
-
-
 "procedure" return PROCEDURE;
 "call" return CALL;
-"begin" return BEGIN;
+"begin" return _BEGIN;
 "end" return END;
 "if" return IF;
 "then" return THEN;
 "else" return ELSE;
 "while" return while;
 "do" return DO;
-""
 
 "="				return EQ;
 "!="			return NE;
@@ -84,10 +69,30 @@ DIGIT	[0-9]
 
 
 
+[0-9]+   					 {    /* WERT HOLEN UND ABSPEICHERN */
+            						yylval.num = atoi(yytext);
+            						return INTNUMBER;
+        						}
 
-...........
-...........
-...........
+[0-9]+\.[0-9]+    {    /* WERT HOLEN UND ABSPEICHERN */
+				            		yylval.num = atof(yytext);
+				            		return REALNUMBER;
+				  				}
+
+
+
+
+
+[a-zA-Z][a-zA-Z0-9]* {
+            /* STRING KOPIEREN */
+            strcpy(yylval.idname, yytext);
+            return IDENT;
+        }
+
+
+
+
+
 
 
 
