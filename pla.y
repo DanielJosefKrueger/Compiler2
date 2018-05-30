@@ -119,15 +119,15 @@ PROGRAM:	{
 			actsym = create_newsym();
 		}
 		BLOCK "$"
+		{
+			FILE* f = fopen("symboltable.txt","w+");
+			printsymtap(actsym,f);
+		}
 		;
 		
 
-	......
-	......
-	.....
-	
-
-		
+BLOCK:
+		CONSTDECL VARDECL PROCDECL STATEMENT | VARDECL PROCDECL STATEMENT | CONSTDECL PROCDECL STATEMENT | PROCDECL STATEMENT
 
 		
 CONDITION:	EXPRESSION RELOP EXPRESSION
