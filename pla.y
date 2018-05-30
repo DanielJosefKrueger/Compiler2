@@ -121,7 +121,7 @@ PROGRAM:	{
 		BLOCK "$"
 		{
 			FILE* f = fopen("symboltable.txt","w+");
-			printsymtap(actsym,f);
+			printsymtab(actsym,f);
 		}
 		;
 
