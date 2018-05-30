@@ -37,7 +37,7 @@ DIGIT	[0-9]
 "if" return IF;
 "then" return THEN;
 "else" return ELSE;
-"while" return while;
+"while" return WHILE;
 "do" return DO;
 
 "="				return EQ;
@@ -64,7 +64,7 @@ DIGIT	[0-9]
 
 
 "$"				return PROGEND;
-"fi"			return
+"fi"			return FI;
 
 
 
