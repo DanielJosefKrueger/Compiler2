@@ -94,15 +94,15 @@
 %token PUNKT		283	"."
 %token COLON		284	":" 
 %token INT			285	"int"
-%token REAL			286	"real" 
-%token BOOL			287	"boolean" 
+%token REAL			286	"real"
+%token BOOL			287	"boolean"
 %token WAHR			288	"true"
 %token FALSCH		289	"false"
 %token PROGEND 		290 "$"
 %token FI 		291  "fi"
 /*
 	Das Nichtterminal TYP hat einen numerischen Wert, naemlich
-	INTIDENT, REALIDENT 
+	INTIDENT, REALIDENT
 */
 
 %type <num> TYP
@@ -124,7 +124,7 @@ PROGRAM:	{
 			printsymtap(actsym,f);
 		}
 		;
-		
+
 
 BLOCK:
 		CONSTDECL VARDECL PROCDECL STATEMENT
@@ -135,23 +135,50 @@ BLOCK:
 			}
 		}
 		;
-CONSTDECL: "const" CONSTASSIGNS ";" | 
-        ;
+
+CONSTDECL: "const" CONSTASSIGNS ";" |
+		;
 
 CONSTASSIGNS: CONSTASS | CONSTASS "," CONSTASSIGNS
 		;
-		
+
 CONSTASS:	IDENT "=" NUMBER
-		{ 
+		{
 			if(lookup_in_actsym($1)!=0) {
 				/* IDENT doppelt vergeben */
 				error(34);
 			} else {
 				insert(CONST,$1,$3);
-			}						
-		}	
-		;			
-		
+			}
+		}
+		;
+
+VARDECL:
+		"var" VARASSIGNS ";" |
+		;
+
+VARASSIGNS:
+		VARASS | VARRASIGNS "," VARASS
+		;
+
+VARASS:
+		IDENT ":" TYP
+		{
+			if(lookup_in_actsym($1) != 0){
+				error(34);
+			} else {
+				switch($3){
+					case INTIDENT:
+						insert(INTIDENT, $1, NULL);
+						break;
+					case REALIDENT:
+						insert(REALIDENT, $1, NULL);
+						break;
+				}
+			}
+		}
+		;
+
 CONDITION:	EXPRESSION RELOP EXPRESSION
 		;
 		
