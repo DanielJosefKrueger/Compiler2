@@ -196,71 +196,95 @@ PROCDECL:
 		BLOCK ";" |
 		;
 
+STATEMENT:
+		IDENT ":=" EXPRESSION
+		{
+			symentry = lookup($1);
+			if(symentry == NULL) {
+				/* IDENT noch nicht deklariert */
+				error(10);
+			} else {
+				idTyp = symentry->type;
+
+				if(idTyp == PROC){
+					/* Zuweisung an procedure oder const */
+					error(11);
+				}
+			}	
+		}
+		
+		
+		|
+		"call" IDENT
+		{
+		
+			symentry = lookup($2);
+			if (symentry == NULL) {
+				/* Ident noch nicht deklariert */
+				error(10);
+				exit(-1);
+			}
+				
+			int idTyp = -1;
+			idTyp = symentry->type;
+		
+			/* Konstante oder Variable nicht in call erlaubt */
+			if(idTyp != PROC){
+				error(14);
+			}
+			
+			
+			
+		}
+		|
+		"begin" STATEMENT STATEMENTS "end"
+		|
+		"if" CONDITION "then" ELSEREPLACEMENT "fi"
+		|
+		"while" CONDITION "do" STATEMENT
+		; 
+
+STATEMENTS:	
+		";" STATEMENT STATEMENTS |
+		;
+
+ELSEREPLACEMENT: STATEMENT | STATEMENT "else" STATEMENT
+		;
+
 CONDITION:	EXPRESSION RELOP EXPRESSION
 		;
 		
 RELOP:		"=" | "!=" | "<" | "<=" | ">" | ">="
 		;
 		
-EXPRESSION:	EXPRESSION "+" TERM 
-		
-
-		|
-
-		EXPRESSION "-" TERM 
-		
-
-		|
-
+EXPRESSION:
+		EXPRESSION "+" TERM |
+		EXPRESSION "-" TERM |
 		TERM
-		
-
 		;
-		
-TERM:		TERM "*" FACTOR 
-		
 
-		|
-
-		TERM "/" FACTOR 
-
-		
-
-
-		|
-
+TERM:	
+		TERM "*" FACTOR |
+		TERM "/" FACTOR |
 		FACTOR
-		
-		
-
 		;
 		
 FACTOR:		IDENT
 		{	symentry= lookup($1); 
 			if (symentry== NULL)
 				error(10);		/* nicht deklariert */
-			
 		}
 
-		|
-		INTNUMBER 	
-		|
-		REALNUMBER
-		
-		|
-		"(" EXPRESSION ")"
-		
-		
+		| INTNUMBER
+		| REALNUMBER
+		| "(" EXPRESSION ")"
+		;
 
-		; 
-		
-TYP:	"int" 
+TYP:	"int"
 		{ $$ = INTIDENT;}
-		|				
-		"real" 
+		|
+		"real"
 		{$$ = REALIDENT; }
-		
-		
 		;
 
 %%
