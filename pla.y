@@ -203,14 +203,7 @@ STATEMENT:
 			if(symentry == NULL) {
 				/* IDENT noch nicht deklariert */
 				error(10);
-			} else {
-				idTyp = symentry->type;
-
-				if(idTyp == PROC){
-					/* Zuweisung an procedure oder const */
-					error(11);
-				}
-			}	
+			}
 		}
 		
 		
