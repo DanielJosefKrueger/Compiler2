@@ -74,8 +74,8 @@ DIGIT	[0-9]
             						return INTNUMBER;
         						}
 
-[0-9]+\.[0-9]+    {    /* WERT HOLEN UND ABSPEICHERN */
-				            		yylval.num = atof(yytext);
+[0-9]+"."[0-9]+    {    /* WERT HOLEN UND ABSPEICHERN */
+				            		yylval.realnum = atof(yytext);
 				            		return REALNUMBER;
 				  				}
 

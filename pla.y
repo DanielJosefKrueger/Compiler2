@@ -148,7 +148,7 @@ CONSTASS:	IDENT "=" INTNUMBER
 				/* IDENT doppelt vergeben */
 				error(34);
 			} else {
-				insert(CONST,$1,$3);
+				insert(KONST,$1,$3);
 			}
 		}
 		;
