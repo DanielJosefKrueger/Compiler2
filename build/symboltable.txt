@@ -1,0 +1,24 @@
+Anzahl der Eintraege: 7
+Blockniveau: 0
+Eintrag Nr: 1	c	310	6
+Eintrag Nr: 2	d	310	7
+Eintrag Nr: 3	n	320	0
+Eintrag Nr: 4	f	330	0
+Eintrag Nr: 5	e	330	0
+Eintrag Nr: 6	test	400	0
+Symboltabelle zu test
+    Anzahl der Eintraege: 3
+    Blockniveau: 1
+    Eintrag Nr: 1    	i	320	0
+    Eintrag Nr: 2    	k	330	0
+    Eintrag Nr: 3    	pla	400	0
+    Symboltabelle zu pla
+        Anzahl der Eintraege: 0
+        Blockniveau: 2
+    Ende Symboltabelle zu pla
+Ende Symboltabelle zu test
+Eintrag Nr: 7	pla	400	0
+Symboltabelle zu pla
+    Anzahl der Eintraege: 0
+    Blockniveau: 1
+Ende Symboltabelle zu pla
